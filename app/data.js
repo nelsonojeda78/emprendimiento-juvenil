@@ -11,7 +11,7 @@
 
 export const META = {
   app: 'Mi Primer Negocio',
-  version: '1.0.1',
+  version: '1.0.0',
   fuenteInforme: 'A1 — Informe de orientación: Ideas de negocio para adolescente (16 años), Macará, Loja',
   agente: 'A1 — Abastecimiento',
   fechaCorte: '2026-05-19',
