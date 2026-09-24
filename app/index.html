@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mi Primer Negocio — Descubre tu idea</title>
+<meta name="description" content="App para que un adolescente descubra qué negocio le conviene y cómo empezarlo paso a paso.">
+<meta name="theme-color" content="#0f1420">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mi Primer Negocio">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="./icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div id="offline-banner" class="offline-banner hidden">Sin conexión — la app sigue funcionando con datos guardados</div>
+<button id="update-toast" class="update-toast hidden">Hay una versión nueva · <span class="upd-link">Actualizar</span></button>
+
+<div class="app">
+
+  <!-- ================= INICIO ================= -->
+  <section id="view-inicio" class="view active">
+    <div class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-emoji">🚀</div>
+      <h1 class="hero-title">Mi Primer<br>Negocio</h1>
+      <p class="hero-sub">Descubre qué idea de negocio encaja contigo y cómo empezarla paso a paso.</p>
+      <div class="hero-chips">
+        <span class="chip">📍 Macará, Loja</span>
+        <span class="chip">💰 150–400 USD</span>
+        <span class="chip">📱 Solo celular</span>
+        <span class="chip">🎂 16 años</span>
+      </div>
+      <button class="btn btn-primary btn-lg" data-go="test">
+        <span>Empezar el test</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <p class="hero-note">9 ideas compatibles con tu edad · 3 minutos</p>
+    </div>
+
+    <div class="card" id="home-resume-card" style="display:none">
+      <div class="card-head">
+        <h2>Tu negocio elegido</h2>
+      </div>
+      <div id="home-resume"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>¿Qué puedes hacer aquí?</h2></div>
+      <div class="feature-grid">
+        <button class="feature" data-go="test">
+          <span class="feature-ico">🎯</span>
+          <span class="feature-t">Test de afinidad</span>
+          <span class="feature-d">9 preguntas para saber qué idea te conviene</span>
+        </button>
+        <button class="feature" data-go="ideas">
+          <span class="feature-ico">💡</span>
+          <span class="feature-t">Las 9 ideas</span>
+          <span class="feature-d">Pros, contras y guía paso a paso</span>
+        </button>
+        <button class="feature" data-go="cuentas">
+          <span class="feature-ico">🧮</span>
+          <span class="feature-t">Tus cuentas</span>
+          <span class="feature-d">Precio, ganancia y punto de equilibrio</span>
+        </button>
+        <button class="feature" data-go="precios">
+          <span class="feature-ico">🔍</span>
+          <span class="feature-t">3 precios</span>
+          <span class="feature-d">Compara 3 vendedores y saca la mediana</span>
+        </button>
+        <button class="feature" data-go="plan90">
+          <span class="feature-ico">🗓️</span>
+          <span class="feature-t">Plan de 90 días</span>
+          <span class="feature-d">Aprender, Validar, Probar, Decidir</span>
+        </button>
+        <button class="feature" data-go="libreta">
+          <span class="feature-ico">📒</span>
+          <span class="feature-t">Libreta diaria</span>
+          <span class="feature-d">Registra todo lo que entra y sale</span>
+        </button>
+        <button class="feature" data-go="habilidades">
+          <span class="feature-ico">🧠</span>
+          <span class="feature-t">6 habilidades</span>
+          <span class="feature-d">Lo que de verdad importa a los 16</span>
+        </button>
+        <button class="feature" data-go="padres">
+          <span class="feature-ico">👨‍👩‍👦</span>
+          <span class="feature-t">Modo padre</span>
+          <span class="feature-d">Lo legal y lo que falta verificar</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="card card-warn">
+      <div class="card-head"><h2>⚠️ Antes de empezar</h2></div>
+      <div id="home-advertencia"></div>
+    </div>
+  </section>
+
+  <!-- ================= TEST ================= -->
+  <section id="view-test" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div>
+        <h1>Test de afinidad</h1>
+        <p class="page-sub">Responde con lo que de verdad harías, no con lo que suena mejor.</p>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div id="test-progress" class="progress-fill"></div></div>
+      <span id="test-progress-label" class="progress-label">0 / 9</span>
+    </div>
+    <div id="test-body"></div>
+  </section>
+
+  <!-- ================= RESULTADO TEST ================= -->
+  <section id="view-resultado" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div><h1>Tu resultado</h1></div>
+    </div>
+    <div id="resultado-body"></div>
+  </section>
+
+  <!-- ================= IDEAS ================= -->
+  <section id="view-ideas" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div>
+        <h1>Las 9 ideas</h1>
+        <p class="page-sub">Ordenadas por encaje estructural con Macará.</p>
+      </div>
+    </div>
+    <div id="ideas-ranking-note"></div>
+    <div id="ideas-list"></div>
+    <div class="card card-danger">
+      <div class="card-head"><h2 id="catc-title"></h2></div>
+      <div id="catc-body"></div>
+    </div>
+  </section>
+
+  <!-- ================= DETALLE IDEA ================= -->
+  <section id="view-detalle" class="view">
+    <div id="detalle-body"></div>
+  </section>
+
+  <!-- ================= CUENTAS / CALCULADORA ================= -->
+  <section id="view-cuentas" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div>
+        <h1>Tus cuentas</h1>
+        <p class="page-sub">El concepto de negocio en 1 página. Si no puedes llenar el punto de equilibrio con un número, todavía no compres inventario.</p>
+      </div>
+    </div>
+    <div id="cuentas-body"></div>
+  </section>
+
+  <!-- ================= COMPARADOR 3 PRECIOS ================= -->
+  <section id="view-precios" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div>
+        <h1>Comparador de 3 precios</h1>
+        <p class="page-sub">El precio real sale de consultar 3 vendedores, no de inventarlo.</p>
+      </div>
+    </div>
+    <div id="precios-body"></div>
+  </section>
+
+  <!-- ================= PLAN 90 DÍAS ================= -->
+  <section id="view-plan90" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div>
+        <h1>Plan de 90 días</h1>
+        <p class="page-sub">Aprender · Validar · Probar · Decidir</p>
+      </div>
+    </div>
+    <div id="plan90-body"></div>
+  </section>
+
+  <!-- ================= LIBRETA ================= -->
+  <section id="view-libreta" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div>
+        <h1>Libreta diaria</h1>
+        <p class="page-sub">La habilidad #1: registrar todo, todos los días.</p>
+      </div>
+    </div>
+    <div id="libreta-body"></div>
+  </section>
+
+  <!-- ================= HABILIDADES ================= -->
+  <section id="view-habilidades" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div><h1>Las 6 habilidades</h1></div>
+    </div>
+    <div id="habilidades-body"></div>
+  </section>
+
+  <!-- ================= MODO PADRE ================= -->
+  <section id="view-padres" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div>
+        <h1>Modo padre / tutor</h1>
+        <p class="page-sub">Lo legal, lo que falta verificar y lo que requiere tu decisión.</p>
+      </div>
+    </div>
+    <div id="padres-body"></div>
+  </section>
+
+  <!-- ================= FUENTES ================= -->
+  <section id="view-fuentes" class="view">
+    <div class="page-head">
+      <button class="btn-back" data-go="inicio">←</button>
+      <div><h1>Fuentes del informe</h1></div>
+    </div>
+    <div id="fuentes-body"></div>
+  </section>
+
+</div>
+
+<nav class="tabbar" id="tabbar">
+  <button class="tab active" data-go="inicio"><span>🏠</span><i>Inicio</i></button>
+  <button class="tab" data-go="test"><span>🎯</span><i>Test</i></button>
+  <button class="tab" data-go="ideas"><span>💡</span><i>Ideas</i></button>
+  <button class="tab" data-go="plan90"><span>🗓️</span><i>Plan</i></button>
+  <button class="tab" data-go="libreta"><span>📒</span><i>Libreta</i></button>
+</nav>
+
+<div id="modal-root"></div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

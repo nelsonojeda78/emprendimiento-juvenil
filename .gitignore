@@ -1,0 +1,22 @@
+# Nunca subir datos personales del adolescente al repositorio.
+# Los datos viven solo en el dispositivo (localStorage del navegador),
+# pero esta lista evita subirlos por error si se exportan a archivo.
+*.csv
+mi-primer-negocio-*.json
+datos-*.json
+libreta-*.csv
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node (solo si se agrega tooling)
+node_modules/
+npm-debug.log*
