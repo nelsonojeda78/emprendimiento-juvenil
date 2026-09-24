@@ -5,7 +5,7 @@
    usuario tenga que desinstalar nada.
    ========================================================================== */
 
-const VERSION = 'v1.0.1';
+const VERSION = 'v1.0.2';
 const CACHE = 'mpn-' + VERSION;
 
 const SHELL = [
